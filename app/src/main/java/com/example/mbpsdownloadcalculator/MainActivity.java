@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            tv_result.setText(" "+mbps);
+            //tv_result.setText(" "+mbps);
 
-            handler.removeCallbacks(runnable);
-            handler.postDelayed(this,500);
+            //handler.removeCallbacks(runnable);
+            //handler.postDelayed(this,500);
         }
     };
     @Override
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mbps = Integer.parseInt(et_mbps.getText().toString());
+                //mbps = Integer.parseInt(et_mbps.getText().toString());
                 tv_result.setText(" "+mbps);
 
             }
