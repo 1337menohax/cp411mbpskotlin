@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Mbps/MiB download calculator</string>
+    <string name="mbps">Megabits per second</string>
+    <string name="mib">Mebibyte</string>
+    <string name="result">Result (in second)</string>
+    <string name="mbps_hint">Mbps</string>
+    <string name="mib_hint">MiB</string>
+    <string name="sec">(sec)</string>
+</resources>
