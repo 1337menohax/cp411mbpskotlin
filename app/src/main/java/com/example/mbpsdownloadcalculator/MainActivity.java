@@ -1,13 +1,9 @@
 package com.example.mbpsdownloadcalculator;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,12 +14,8 @@ public class MainActivity extends AppCompatActivity {
 
     double transferTime = 0;
     int userMbps,userMib = 0;
-    boolean flag_mbps,flag_mib = false;
+    boolean flagMbps,flagMib = false;
 
-    private double calculate(int mbps, int mib){
-        double megaBit = mib * 8.389;
-        return (megaBit/mbps);
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,25 +33,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(!et_mbps.getText().toString().isEmpty()){
-
                     userMbps = Integer.parseInt(et_mbps.getText().toString());
-                    flag_mbps = true;
+                    flagMbps = true;
                 }
-
-                //TODO limit charsequence
-                /*if(charSequence.length() >= 3){
-                    et_mbps.setText("123");
+                else
+                {
+                    tv_result.setText(getString(R.string.default_Sec));
+                    flagMbps = false;
                 }
-                Log.i("HIIII", String.valueOf(charSequence.length()));*/
             }
 
+
+            //If both mbps and mib editText are both fill out, start calculating
             @Override
             public void afterTextChanged(Editable editable) {
-                if(flag_mbps && flag_mib){
+                if(flagMbps && flagMib){
                     transferTime = calculate(userMbps,userMib);
                     tv_result.setText(String.format("%.1f",transferTime));
 
                 }
+
             }
         });
         et_mib.addTextChangedListener(new TextWatcher() {
@@ -72,19 +65,31 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(!et_mib.getText().toString().isEmpty()){
                     userMib = Integer.parseInt(et_mib.getText().toString());
+                    flagMbps = true;
+
+
+                    //For invalid MiB value
                     if(userMib == 0 ){
                         tv_result.setText("Invalid file size");
-                        flag_mib = false;
+                        flagMib = false;
                     }
                     else{
-                        flag_mib = true;
+                        flagMib = true;
                     }
+                }
+                //When EditText is empty, replace with default second
+                //flag_mbps = false to avoid calculation
+                else
+                {
+                    tv_result.setText(getString(R.string.default_Sec));
+                    flagMbps = false;
                 }
             }
 
+            //If both mbps and mib are both fill out, start calculation
             @Override
             public void afterTextChanged(Editable editable) {
-                if(flag_mbps && flag_mib){
+                if(flagMbps && flagMib){
                     transferTime = calculate(userMbps,userMib);
                     tv_result.setText(String.format("%.1f",transferTime));
 
@@ -93,7 +98,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
+    private double calculate(int mbps, int mib){
+        double megaBit = mib * 8.389;
+        return (megaBit/mbps);
+    }
 }
 
