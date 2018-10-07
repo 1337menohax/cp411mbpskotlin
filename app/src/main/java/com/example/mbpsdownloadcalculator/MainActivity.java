@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(!et_mib.getText().toString().isEmpty()){
                     userMib = Integer.parseInt(et_mib.getText().toString());
-                    flagMbps = true;
+                    flagMib = true;
 
 
                     //For invalid MiB value
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 else
                 {
                     tv_result.setText(getString(R.string.default_Sec));
-                    flagMbps = false;
+                    flagMib = false;
                 }
             }
 
