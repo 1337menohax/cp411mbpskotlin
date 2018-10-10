@@ -1,3 +1,5 @@
+
+
 package com.example.mbpsdownloadcalculator;
 
 import android.support.v7.app.AppCompatActivity;
@@ -50,9 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 if(flagMbps && flagMib){
                     transferTime = calculate(userMbps,userMib);
                     tv_result.setText(String.format("%.1f",transferTime));
-
                 }
-
             }
         });
         et_mib.addTextChangedListener(new TextWatcher() {
