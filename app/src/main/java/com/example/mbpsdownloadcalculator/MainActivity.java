@@ -1,3 +1,5 @@
+
+
 package com.example.mbpsdownloadcalculator;
 
 import android.support.v7.app.AppCompatActivity;
@@ -50,9 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 if(flagMbps && flagMib){
                     transferTime = calculate(userMbps,userMib);
                     tv_result.setText(String.format("%.1f",transferTime));
-
                 }
-
             }
         });
         et_mib.addTextChangedListener(new TextWatcher() {
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(!et_mib.getText().toString().isEmpty()){
                     userMib = Integer.parseInt(et_mib.getText().toString());
-                    flagMbps = true;
+                    flagMib = true;
 
 
                     //For invalid MiB value

@@ -5,5 +5,5 @@
     <string name="result">Result (in second)</string>
     <string name="mbps_hint">Mbps</string>
     <string name="mib_hint">MiB</string>
-    <string name="sec">(sec)</string>
+    <string name="default_Sec">(sec)</string>
 </resources>
