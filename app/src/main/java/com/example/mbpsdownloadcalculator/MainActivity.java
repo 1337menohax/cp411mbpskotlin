@@ -1,5 +1,3 @@
-
-
 package com.example.mbpsdownloadcalculator;
 
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     double transferTime = 0;
     int userMbps,userMib = 0;
     boolean flagMbps,flagMib = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
                     flagMbps = false;
                 }
             }
-
-
             //If both mbps and mib editText are both fill out, start calculating
             @Override
             public void afterTextChanged(Editable editable) {
@@ -58,16 +53,12 @@ public class MainActivity extends AppCompatActivity {
         et_mib.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(!et_mib.getText().toString().isEmpty()){
                     userMib = Integer.parseInt(et_mib.getText().toString());
                     flagMib = true;
-
-
                     //For invalid MiB value
                     if(userMib == 0 ){
                         tv_result.setText("Invalid file size");
@@ -97,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private double calculate(int mbps, int mib){
         double megaBit = mib * 8.389;
         return (megaBit/mbps);
