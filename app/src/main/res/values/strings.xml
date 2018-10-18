@@ -6,4 +6,5 @@
     <string name="mbps_hint">Enter Megabit/sec</string>
     <string name="mib_hint">Enter Mebibyte</string>
     <string name="default_Sec">0.0</string>
+    <string name="default_Invalid">Invalid input</string>
 </resources>
