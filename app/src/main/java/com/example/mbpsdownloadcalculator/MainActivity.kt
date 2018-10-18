@@ -4,45 +4,42 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.EditText
-import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
-class MainActivity : AppCompatActivity() {
 
+//Last Update: 18OCT2018
+//DESC: Takes user input: Mbps and Mib, to then calculate the transfer time.
+//WARNING: THIS PROGRAM DOES NOT WORK ON DECIMAL NUMBERS
+//Note to self: allow decimal inputs in the future
+class MainActivity : AppCompatActivity() {
 
     //Flag for checking for invalid user input
     //True: input valid. E.g integer
     //False: input invalid. E.g zeros, empty input
     internal var validMbps = false
     internal var validMib = false
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        /*tv_result = findViewById(R.id.resultText)
-        et_mbps = findViewById(R.id.mbpsText)
-        et_mib = findViewById(R.id.mibText)*/
 
         mbpsText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
                 //To check if string is not empty
-                //DO:Convert user input into userMbps.
-                //ELSE:display "invalid input" onto the screen
-                //PROBLEM: val userMbps cannot be reassign
+                //DO: Set valid flag to true for later calculation
+                //ELSE: Display "invalid input" onto the screen
                 if (!mbpsText.text.toString().isEmpty()) {
                     validMbps = true
-                    if (getMib() == 0) {
+                    //invalid msg if input 0
+                    if (getMbps() == 0) {
                         resultText.text = getString(R.string.default_Invalid)
-                        validMib = false
+                        validMbps = false
                     }
                 } else {
                     resultText.text = getString(R.string.default_Sec)
                     validMbps = false
                 }
             }
-            //If both mbps and mib editText are BOTH fill out, start calculating
+            //If mbps and mib editText are BOTH fill out, start calculating
             //DO: call calculate()
             override fun afterTextChanged(editable: Editable) {
                 if (validMbps && validMib) {
@@ -76,17 +73,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun calculate(mbps: Int, mib: Int): Double {
+        //DESC: convert mib ->megabit, then calculate the transfer time
         val megaBit = mib * 8.389
-        val tranferTime = megaBit / mbps
-        return tranferTime
+        return megaBit / mbps
     }
     private fun getMbps():Int {
-        val userMbps = Integer.parseInt(mbpsText.text.toString())
-        return userMbps
+        //DESC: return user Mbps input
+        return Integer.parseInt(mbpsText.text.toString())
     }
     private fun getMib():Int {
-        val userMib = Integer.parseInt(mibText.text.toString())
-        return userMib
+        //DESC: return user Mib input
+        return Integer.parseInt(mibText.text.toString())
     }
 }
 
