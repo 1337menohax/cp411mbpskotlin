@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 //Last Update: 18OCT2018
 //DESC: Takes user input: Mbps and Mib, to then calculate the transfer time.
-//WARNING: THIS PROGRAM DOES NOT WORK ON DECIMAL NUMBERS
+//WARNING: THIS PROGRAM DOES NOT WORK ON DECIMAL INPUT
 //Note to self: allow decimal inputs in the future
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     //False: input invalid. E.g zeros, empty input
     internal var validMbps = false
     internal var validMib = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                     validMbps = false
                 }
             }
-            //If mbps and mib editText are BOTH fill out, start calculating
+            //If mbps and mib flags are BOTH true, start calculating
             //DO: call calculate()
             override fun afterTextChanged(editable: Editable) {
                 if (validMbps && validMib) {
