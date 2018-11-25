@@ -2,89 +2,79 @@ package com.example.mbpsdownloadcalculator
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
-//Last Update: 18OCT2018
+
+//Last Update: 23NOV2018
 //DESC: Takes user input: Mbps and Mib, to then calculate the transfer time.
-//WARNING: THIS PROGRAM DOES NOT WORK ON DECIMAL INPUT
-//Note to self: allow decimal inputs in the future
+//0.1:  -Enable decimal
+//      -Added fragment
 class MainActivity : AppCompatActivity() {
 
-    //Flag for checking for invalid user input
-    //True: input valid. E.g integer
-    //False: input invalid. E.g zeros, empty input
-    internal var validMbps = false
-    internal var validMib = false
+    var isFragmentDisplayed = false
+    private val STATE_FRAGMENT = "state_of_fragment"
 
+    public override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        // Save the state of the fragment (true=open, false=closed).
+        savedInstanceState.putBoolean(STATE_FRAGMENT, isFragmentDisplayed)
+        super.onSaveInstanceState(savedInstanceState)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mbpsText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                //To check if string is not empty
-                //DO: Set valid flag to true for later calculation
-                //ELSE: Display "invalid input" onto the screen
-                if (!mbpsText.text.toString().isEmpty()) {
-                    validMbps = true
-                    //invalid msg if input 0
-                    if (getMbps() == 0) {
-                        resultText.text = getString(R.string.default_Invalid)
-                        validMbps = false
-                    }
-                } else {
-                    resultText.text = getString(R.string.default_Sec)
-                    validMbps = false
-                }
+        if (savedInstanceState != null) { //if bundle were saved successful
+            isFragmentDisplayed =
+                    savedInstanceState.getBoolean(STATE_FRAGMENT)
+            if (isFragmentDisplayed) {
+                // If the fragment is displayed, change button to "close".
+                open_button.setText(R.string.close_button)
             }
-            //If mbps and mib flags are BOTH true, start calculating
-            //DO: call calculate()
-            override fun afterTextChanged(editable: Editable) {
-                if (validMbps && validMib) {
-                    resultText.setText(String.format("%.1f", calculate(getMbps(), getMib())))
-                }
+        }
+        // Set the click listener for the button.
+        open_button.setOnClickListener {
+            if (!isFragmentDisplayed) {
+                displayFragment()
+            } else {
+                closeFragment()
             }
-        })
-        mibText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                if (!mibText.text.toString().isEmpty()) {
-                    validMib = true
-                    //For invalid MiB value
-                    //this is for in case where we divide by 0
-                    if (getMib() == 0) {
-                        resultText.text = getString(R.string.default_Invalid)
-                        validMib = false
-                    }
-                } else {
-                    resultText.text = getString(R.string.default_Sec)
-                    validMib = false
-                }
-            }
-            //If both mbps and mib are both fill out, start calculation
-            override fun afterTextChanged(editable: Editable) {
-                if (validMbps && validMib) {
-                    resultText.setText(String.format("%.1f", calculate(getMbps(), getMib())))
-                }
-            }
-        })
+        }
+    }
+    fun displayFragment() {
+        var mainFragment = MainFragment.newInstance()
+
+        // TODO: Get the FragmentManager and start a transaction.
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager
+                .beginTransaction()
+
+        // TODO: Add the SimpleFragment.
+        // Add the SimpleFragment.
+        fragmentTransaction.add(R.id.fragment_container,
+                mainFragment).addToBackStack(null).commit()
+        // Update the Button text.
+                open_button.setText(R.string.close_button)
+        // Set boolean flag to indicate fragment is open.
+                isFragmentDisplayed = true
     }
 
-    private fun calculate(mbps: Int, mib: Int): Double {
-        //DESC: convert mib ->megabit, then calculate the transfer time
-        val megaBit = mib * 8.389
-        return megaBit / mbps
+    fun closeFragment() {
+        // Get the FragmentManager.
+        val fragmentManager = supportFragmentManager
+        // Check to see if the fragment is already showing.
+        val mainFragment = fragmentManager
+                .findFragmentById(R.id.fragment_container) as MainFragment
+        if (mainFragment != null) {
+            // Create and commit the transaction to remove the fragment.
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.remove(mainFragment).commit()
+        }
+        // Update the Button text.
+        open_button.setText(R.string.open_button)
+        // Set boolean flag to indicate fragment is closed.
+        isFragmentDisplayed = false
     }
-    private fun getMbps():Int {
-        //DESC: return user Mbps input
-        return Integer.parseInt(mbpsText.text.toString())
-    }
-    private fun getMib():Int {
-        //DESC: return user Mib input
-        return Integer.parseInt(mibText.text.toString())
-    }
+
 }
 

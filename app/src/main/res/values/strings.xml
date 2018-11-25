@@ -6,5 +6,8 @@
     <string name="mbps_hint">Enter Megabit/sec</string>
     <string name="mib_hint">Enter Mebibyte</string>
     <string name="default_Sec">0.0</string>
-    <string name="default_Invalid">Invalid input</string>
+    <string name="default_Invalid">Cannot divide by 0</string>
+    <string name="open_button">OPEN</string>
+    <string name="close_button">CLOSE</string>
+
 </resources>
