@@ -12,11 +12,12 @@
         android:id="@+id/label_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="336dp"
+        android:layout_marginTop="32dp"
         android:text="@string/result"
-        android:textSize="24sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/label_mib"
-        app:layout_constraintTop_toBottomOf="@+id/label_mib" />
+        app:layout_constraintTop_toTopOf="@+id/label_mbps" />
 
     <TextView
         android:id="@+id/label_mib"
@@ -34,8 +35,8 @@
         android:id="@+id/label_mbps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:text="@string/mbps"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
@@ -46,6 +47,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:imeOptions="flagNoExtractUi"
         android:id="@+id/mibText"
         android:layout_width="215dp"
         android:layout_height="wrap_content"
@@ -64,6 +66,7 @@
 
 
     <EditText
+        android:imeOptions="flagNoExtractUi"
         android:id="@+id/mbpsText"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
@@ -83,13 +86,13 @@
         android:id="@+id/resultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="216dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:text="@string/default_Sec"
         android:textAlignment="center"
         android:textColor="?android:attr/colorAccent"
-        android:textSize="36sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/label_mbps"
-        app:layout_constraintTop_toBottomOf="@+id/mibText" />
+        app:layout_constraintStart_toStartOf="@+id/label_result"
+        app:layout_constraintTop_toBottomOf="@+id/label_result" />
+
 </android.support.constraint.ConstraintLayout>

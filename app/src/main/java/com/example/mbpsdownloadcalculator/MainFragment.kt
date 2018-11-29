@@ -9,8 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_main.*
-import android.widget.TextView
-import android.widget.RadioGroup
+
 
 
 
@@ -33,6 +32,7 @@ class MainFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Flag for checking for invalid user input
@@ -89,6 +89,7 @@ class MainFragment : Fragment() {
         fun newInstance(): MainFragment {
             return MainFragment()
         }
+
     }
     private fun calculate(mbps: Double, mib: Double): Double {
         //DESC: convert mib ->megabit, then calculate the transfer time

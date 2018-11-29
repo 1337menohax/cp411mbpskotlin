@@ -1,19 +1,25 @@
 package com.example.mbpsdownloadcalculator
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
+import android.graphics.Rect
+import android.widget.EditText
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 
 
 //Last Update: 23NOV2018
 //DESC: Takes user input: Mbps and Mib, to then calculate the transfer time.
+//BUG: back button close fragment
 //0.1:  -Enable decimal
 //      -Added fragment
 class MainActivity : AppCompatActivity() {
 
     var isFragmentDisplayed = false
     private val STATE_FRAGMENT = "state_of_fragment"
+
 
     public override fun onSaveInstanceState(savedInstanceState: Bundle) {
         // Save the state of the fragment (true=open, false=closed).
@@ -41,15 +47,30 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    fun displayFragment() {
+    //DESC: defocus when touch outside of editText
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (v is EditText) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                    v.clearFocus()
+                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(v.windowToken, 0)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
+    }
+    private fun displayFragment() {
         var mainFragment = MainFragment.newInstance()
 
-        // TODO: Get the FragmentManager and start a transaction.
+        //Get the FragmentManager and start a transaction.
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager
                 .beginTransaction()
 
-        // TODO: Add the SimpleFragment.
         // Add the SimpleFragment.
         fragmentTransaction.add(R.id.fragment_container,
                 mainFragment).addToBackStack(null).commit()
@@ -59,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                 isFragmentDisplayed = true
     }
 
-    fun closeFragment() {
+    private fun closeFragment() {
         // Get the FragmentManager.
         val fragmentManager = supportFragmentManager
         // Check to see if the fragment is already showing.
@@ -75,6 +96,7 @@ class MainActivity : AppCompatActivity() {
         // Set boolean flag to indicate fragment is closed.
         isFragmentDisplayed = false
     }
+
 
 }
 
