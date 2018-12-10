@@ -1,6 +1,8 @@
 package com.example.mbpsdownloadcalculator
 
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
@@ -10,16 +12,17 @@ import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 
 
-//Last Update: 23NOV2018
+
+//Last Update: 03DEC2018
 //DESC: Takes user input: Mbps and Mib, to then calculate the transfer time.
 //BUG: back button close fragment
-//0.1:  -Enable decimal
+//0.01:  -Enable decimal
 //      -Added fragment
+//0.02:  -Added databinding
 class MainActivity : AppCompatActivity() {
 
     var isFragmentDisplayed = false
     private val STATE_FRAGMENT = "state_of_fragment"
-
 
     public override fun onSaveInstanceState(savedInstanceState: Bundle) {
         // Save the state of the fragment (true=open, false=closed).
@@ -29,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         if (savedInstanceState != null) { //if bundle were saved successful
             isFragmentDisplayed =
                     savedInstanceState.getBoolean(STATE_FRAGMENT)
