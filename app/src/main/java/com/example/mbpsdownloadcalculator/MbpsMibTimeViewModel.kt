@@ -10,9 +10,13 @@ import android.text.TextWatcher
 import android.util.Log
 import com.example.mbpsdownloadcalculator.R.id.mbpsText
 import com.example.mbpsdownloadcalculator.R.id.mibText
+import android.text.SpannableString
 
 
-//class MbpsMibTimeViewModel : ViewModel() {
+
+
+
+class MbpsMibTimeViewModel : ViewModel() {
 //    var mbps = ObservableDouble()
 //    var mib = ObservableDouble()
 //    val transferTime: ObservableDouble = object : ObservableDouble(mbps, mib) {
@@ -50,22 +54,19 @@ import com.example.mbpsdownloadcalculator.R.id.mibText
 //    fun recompute(): ObservableDouble {
 //        return transferTime //todo change to transfertime
 //    }
-class User : BaseObservable() {
-
-    @get:Bindable
-    var mbps: Double = 0.0
-        set(value) {
-            field = value
-            notifyPropertyChanged(mbpsText)
-        }
-    fun getMbps(): Double {
-        return mbps
-    }
-
-    @get:Bindable
-    var mib: Double = 0.0
-        set(value) {
-            field = value
-            notifyPropertyChanged(mibText)
-        }
-}
+//class User : BaseObservable() {
+//
+//    @get:Bindable
+//    var mbps: Double = 0.0
+//        set(value) {
+//            field = value
+//            notifyPropertyChanged(BR.mbps)
+//        }
+//
+//    @get:Bindable
+//    var mib: Double = 0.0
+//        set(value) {
+//            field = value
+//            notifyPropertyChanged(BR.mib)
+//        }
+//}
