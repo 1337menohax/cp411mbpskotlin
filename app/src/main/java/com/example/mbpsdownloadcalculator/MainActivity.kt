@@ -13,7 +13,7 @@ import android.view.inputmethod.InputMethodManager
 
 
 
-//Last Update: 03DEC2018
+//Last Update: 11DEC2018
 //DESC: Takes user input: Mbps and Mib, to then calculate the transfer time.
 //BUG: back button close fragment
 //0.01:  -Enable decimal

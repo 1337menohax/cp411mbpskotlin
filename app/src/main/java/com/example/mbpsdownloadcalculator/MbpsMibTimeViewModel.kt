@@ -1,9 +1,8 @@
 package com.example.mbpsdownloadcalculator
 
 import android.arch.lifecycle.ViewModel
-import android.databinding.BaseObservable
-import android.databinding.Bindable
 import android.databinding.ObservableDouble
+import java.text.DecimalFormat
 
 
 
@@ -13,6 +12,7 @@ class MbpsMibTimeViewModel : ViewModel() {
     //False: input invalid. E.g zeros, empty input
     var validMbps = false
     var validMib = false
+
     var mbps :Double = 0.0
     var mib :Double = 0.0
     val transferTime = ObservableDouble()
@@ -49,49 +49,9 @@ class MbpsMibTimeViewModel : ViewModel() {
     }
 
     private fun calculate(mbps:Double, mib:Double):Double{
-        return (mib * 8.389) / mbps
-
+        val result = (mib * 8.389 / mbps)
+        val df = DecimalFormat("#.##")
+        return java.lang.Double.valueOf(df.format(result))
     }
 }
 
-//    fun recompute():Double{
-//        return transferTime.get()
-//    }
-
-//    fun onTextChanged(s: CharSequence) {
-//        mib.set(s.toString().toDouble())
-//    }
-
-//    fun onTitleTextChanged(): TextWatcher {
-//        return object : TextWatcher {
-//            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-//
-//            }
-//            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-//
-//            }
-//
-//            override fun afterTextChanged(editable: Editable) {
-//
-//            }
-//        }
-//    }
-
-
-
-//class User : BaseObservable() {
-//
-//    @get:Bindable
-//    var mbps: Double = 0.0
-//        set(value) {
-//            field = value
-//            //notifyPropertyChanged(BR.mbps)
-//        }
-//
-//    @get:Bindable
-//    var mib: Double = 0.0
-//        set(value) {
-//            field = value
-//            //notifyPropertyChanged(BR.mib)
-//        }
-//}
