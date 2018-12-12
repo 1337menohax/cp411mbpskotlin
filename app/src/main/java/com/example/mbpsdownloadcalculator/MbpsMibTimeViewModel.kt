@@ -13,8 +13,8 @@ class MbpsMibTimeViewModel : ViewModel() {
     //False: input invalid. E.g zeros, empty input
     var validMbps = false
     var validMib = false
-    var mbps = 0.0
-    var mib = 0.0
+    var mbps :Double = 0.0
+    var mib :Double = 0.0
     val transferTime = ObservableDouble()
     fun onMbps(s:CharSequence){
         if (s.toString().isEmpty() || s.toString() == ".") {
@@ -50,6 +50,7 @@ class MbpsMibTimeViewModel : ViewModel() {
 
     private fun calculate(mbps:Double, mib:Double):Double{
         return (mib * 8.389) / mbps
+
     }
 }
 
