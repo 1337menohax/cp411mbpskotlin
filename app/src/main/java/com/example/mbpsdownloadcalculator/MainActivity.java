@@ -1,4 +1,5 @@
-/*
+/*SCRATCH
+
 package com.example.mbpsdownloadcalculator;
 
 import android.support.v7.app.AppCompatActivity;

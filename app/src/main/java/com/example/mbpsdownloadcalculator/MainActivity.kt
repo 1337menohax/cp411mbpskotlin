@@ -1,8 +1,6 @@
 package com.example.mbpsdownloadcalculator
 
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
@@ -13,12 +11,15 @@ import android.view.inputmethod.InputMethodManager
 
 
 
-//Last Update: 11DEC2018
-//DESC: Takes user input: Mbps and Mib, to then calculate the transfer time.
-//BUG: back button close fragment
-//0.01:  -Enable decimal
-//      -Added fragment
-//0.02:  -Added databinding
+/**MBPS-Mib Converter
+ * DESC: Takes user input: Mbps and Mib, to then calculate the transfer time.
+ * CREATED DATE: 16OCT2018
+ * CREATED BY: Ivan Vu
+ * LAST UPDATE: 11DEC2018
+ * UPDATED BY: Ivan Vu
+ * 0.01:  -Enable decimal -Added fragment
+ * 0.02:  -Enable data binding
+ */
 class MainActivity : AppCompatActivity() {
 
     var isFragmentDisplayed = false

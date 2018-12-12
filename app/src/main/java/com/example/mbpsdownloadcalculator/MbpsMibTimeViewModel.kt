@@ -16,6 +16,10 @@ class MbpsMibTimeViewModel : ViewModel() {
     var mbps :Double = 0.0
     var mib :Double = 0.0
     val transferTime = ObservableDouble()
+
+    /** FUNC: onMbps()
+     * DESC: Call when theres a text change in Mbps editview
+     * */
     fun onMbps(s:CharSequence){
         if (s.toString().isEmpty() || s.toString() == ".") {
             validMbps = false
@@ -34,6 +38,9 @@ class MbpsMibTimeViewModel : ViewModel() {
         }
 
     }
+    /** FUNC: onMib()
+     * DESC: Call when theres a text change in Mib editview
+     * */
     fun onMib(s:CharSequence){
         if (s.toString().isEmpty()|| s.toString() == ".") {
             validMib = false
