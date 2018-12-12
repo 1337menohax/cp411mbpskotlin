@@ -1,98 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="mbpsmibviewmodel"
+            type="com.example.mbpsdownloadcalculator.MbpsMibTimeViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainFragment">
 
 
-    <TextView
-        android:id="@+id/label_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="336dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/result"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/label_mib"
-        app:layout_constraintTop_toTopOf="@+id/label_mbps" />
+        <TextView
+            android:id="@+id/label_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="336dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/result"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/label_mib"
+            app:layout_constraintTop_toTopOf="@+id/label_mbps" />
 
-    <TextView
-        android:id="@+id/label_mib"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/mib"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/label_mbps"
-        app:layout_constraintTop_toTopOf="@+id/mibText" />
+        <TextView
+            android:id="@+id/label_mib"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mib"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/label_mbps"
+            app:layout_constraintTop_toTopOf="@+id/mibText" />
 
-    <TextView
-        android:id="@+id/label_mbps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:text="@string/mbps"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/label_mbps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/mbps"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:imeOptions="flagNoExtractUi"
-        android:id="@+id/mibText"
-        android:layout_width="215dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:ems="10"
-        android:hapticFeedbackEnabled="false"
-        android:hint="@string/mib_hint"
-        android:inputType="numberDecimal"
-        android:maxLength="9"
-        android:textAlignment="center"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toEndOf="@+id/label_mbps"
-        app:layout_constraintTop_toBottomOf="@+id/mbpsText" />
+        <EditText
+            android:imeOptions="flagNoExtractUi"
+            android:id="@+id/mibText"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:ems="10"
+            android:hapticFeedbackEnabled="false"
+            android:hint="@string/mib_hint"
+            android:inputType="numberDecimal"
+            android:maxLength="9"
+            android:textAlignment="center"
+            android:textStyle="bold|italic"
+            android:onTextChanged="@{(s,start,before,count) -> mbpsmibviewmodel.onMib(s)}"
+            app:layout_constraintStart_toEndOf="@+id/label_mbps"
+            app:layout_constraintTop_toBottomOf="@+id/mbpsText" />
 
 
-    <EditText
-        android:imeOptions="flagNoExtractUi"
-        android:id="@+id/mbpsText"
-        android:layout_width="wrap_content"
-        android:layout_height="44dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:ems="10"
-        android:hint="@string/mbps_hint"
-        android:inputType="numberDecimal"
-        android:maxLength="9"
-        android:textAlignment="center"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toEndOf="@+id/label_mbps"
-        app:layout_constraintTop_toTopOf="@+id/label_mbps" />
+        <EditText
+            android:imeOptions="flagNoExtractUi"
+            android:id="@+id/mbpsText"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:ems="10"
+            android:hint="@string/mbps_hint"
+            android:inputType="numberDecimal"
+            android:maxLength="9"
+            android:textAlignment="center"
+            android:textStyle="bold|italic"
+            android:onTextChanged="@{(s,start,before,count) -> mbpsmibviewmodel.onMbps(s)}"
+            app:layout_constraintStart_toEndOf="@+id/label_mbps"
+            app:layout_constraintTop_toTopOf="@+id/label_mbps" />
 
-    <TextView
-        android:id="@+id/resultText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/default_Sec"
-        android:textAlignment="center"
-        android:textColor="?android:attr/colorAccent"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/label_result"
-        app:layout_constraintTop_toBottomOf="@+id/label_result" />
+        <TextView
+            android:id="@+id/resultText"
+            android:text="@{Double.toString(mbpsmibviewmodel.transferTime)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textColor="?android:attr/colorAccent"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/label_result"
+            app:layout_constraintTop_toBottomOf="@+id/label_result" />
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -4,34 +4,61 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.databinding.ObservableDouble
-import android.databinding.ObservableField
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
-import com.example.mbpsdownloadcalculator.R.id.mbpsText
-import com.example.mbpsdownloadcalculator.R.id.mibText
-import android.text.SpannableString
-
-
 
 
 
 class MbpsMibTimeViewModel : ViewModel() {
-//    var mbps = ObservableDouble()
-//    var mib = ObservableDouble()
-//    val transferTime: ObservableDouble = object : ObservableDouble(mbps, mib) {
-//        override fun get(): Double {
-//            return (mib.get() * 8.389) / mbps.get()
-//        }
-//    }
-//
+    //Flag for checking for invalid user input
+    //True: input valid. E.g integer
+    //False: input invalid. E.g zeros, empty input
+    var validMbps = false
+    var validMib = false
+    var mbps = 0.0
+    var mib = 0.0
+    val transferTime = ObservableDouble()
+    fun onMbps(s:CharSequence){
+        if (s.toString().isEmpty() || s.toString() == ".") {
+            validMbps = false
+            transferTime.set(0.0)
+        }
+        else {
+            validMbps = true
+            mbps = s.toString().toDouble()
+            if (mbps == 0.0){
+                validMbps = false
+                transferTime.set(0.0)
+            }
+        }
+        if (validMbps && validMib) {
+            transferTime.set(calculate(mbps,mib))
+        }
+
+    }
+    fun onMib(s:CharSequence){
+        if (s.toString().isEmpty()|| s.toString() == ".") {
+            validMib = false
+            transferTime.set(0.0)
+            }
+        else {
+            validMib = true
+            mib = s.toString().toDouble()
+            }
+        if (validMbps && validMib) {
+            transferTime.set(calculate(mbps,mib))
+        }
+    }
+
+    private fun calculate(mbps:Double, mib:Double):Double{
+        return (mib * 8.389) / mbps
+    }
+}
+
 //    fun recompute():Double{
 //        return transferTime.get()
 //    }
 
-//    fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-//        mbps= java.lang.Double.parseDouble(s.toString())
-//
+//    fun onTextChanged(s: CharSequence) {
+//        mib.set(s.toString().toDouble())
 //    }
 
 //    fun onTitleTextChanged(): TextWatcher {
@@ -49,24 +76,21 @@ class MbpsMibTimeViewModel : ViewModel() {
 //        }
 //    }
 
-}
 
-//    fun recompute(): ObservableDouble {
-//        return transferTime //todo change to transfertime
-//    }
+
 //class User : BaseObservable() {
 //
 //    @get:Bindable
 //    var mbps: Double = 0.0
 //        set(value) {
 //            field = value
-//            notifyPropertyChanged(BR.mbps)
+//            //notifyPropertyChanged(BR.mbps)
 //        }
 //
 //    @get:Bindable
 //    var mib: Double = 0.0
 //        set(value) {
 //            field = value
-//            notifyPropertyChanged(BR.mib)
+//            //notifyPropertyChanged(BR.mib)
 //        }
 //}

@@ -12,8 +12,8 @@ import com.android.databinding.library.baseAdapters.R
 
 
 object BindingAdapter {
-    var validMbps = false
-    var validMib = false
+//    var validMbps = false
+//    var validMib = false
     @BindingAdapter(value = ["android:beforeTextChanged", "android:onTextChanged", "android:afterTextChanged", "android:textAttrChanged"], requireAll = false)
     @JvmStatic
     fun setTextWatcher(view: TextView, before: BeforeTextChanged?,
